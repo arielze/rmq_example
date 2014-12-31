@@ -6,5 +6,5 @@ it is very basic, it includes the worker which uses [Sneakers](https://github.co
 Later on I’ll add:
 
 1. message publishing to rabbit
-2. start and stop scripts
+2. start and stop scripts (Foreman)
 3. deployment script (capistrano)
