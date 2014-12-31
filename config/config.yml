@@ -1,0 +1,41 @@
+default: &default
+  rabbit: &rabbit
+    amqp: amqp://user:passwordQ@localhost
+    simple_worker:
+          queue_name: simple_worker
+          exchange_name: main_exchange_dev
+          routing_key: dev.events.#
+          log: './log/_worker.log'
+          exchange_type: topic
+
+test:
+  <<: *default
+
+development:
+  <<: *default
+
+staging:
+  <<: *default
+  rabbit:
+    <<: *rabbit
+    amqp: amqp://user:passwordQ@staging_server
+    simple_worker:
+          queue_name: simple_worker
+          exchange_name: main_exchange
+          routing_key: prod.events.#
+          log: './log/_worker.log'
+          exchange_type: topic
+
+
+production:
+  <<: *default
+  rabbit:
+    <<: *rabbit
+    amqp: amqp://user:passwordQ@production_server
+    simple_worker:
+          queue_name: simple_worker
+          exchange_name: main_exchange_staging
+          routing_key: prod.events.#
+          log: './log/_worker.log'
+          exchange_type: topic
+
